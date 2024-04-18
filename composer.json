@@ -1,0 +1,50 @@
+{
+    "name": "bleeld/think-oss",
+    "description": "This is a collection of OSS remote file management drivers developed in factory mode. Users can use different OSS extensions according to their business needs. In the future, developers can further improve more OSS drivers according to their own needs.",
+    "homepage": "https://github.com/bleeld/think-oss",
+    "keywords": [
+        "thinkphp6",
+        "thinkphp8",
+        "oss"
+    ],
+	"version": "1.0.0",
+    "authors": [
+        {
+            "name": "dreamlee",
+            "email": "1755773846@qq.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/bleeld/think-oss/issues"
+    },
+    "license": "MIT",
+    "require": {
+        "php": "^7.0||^8.0",
+        "bleeld/driver-alioss": "^1.0",
+        "bleeld/driver-qiniuoss": "^1.0"
+    },
+    "suggest": {
+        "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
+    },
+    "autoload": {
+        "psr-4": {
+			"think\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "config":{
+                "oss": "src/config/oss.php"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5||9.5"
+    },
+    "scripts" : {
+        "post-install-cmd": [
+            "php think oss:config"
+        ]
+    }
+}
