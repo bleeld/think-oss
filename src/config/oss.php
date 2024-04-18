@@ -28,10 +28,10 @@ return [
     ],
     // 七牛云COS配置
     'qiniu_oss' => [
-        'secretId'       => '',
-        'secretKey'      => '',
-        'bucket'         => '',
-        'domain'         => '',
+        'accessKeyId'		=> '',
+        'accessKeySecret'	=> '',
+        'bucket'			=> '',
+        'domain'			=> '',
     ],
     // ... 其他配置
 ];
