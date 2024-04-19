@@ -94,10 +94,10 @@ class QiniuDriver implements SdkInterface
                 if(!empty($ret['items'])){
                     foreach ($ret['items'] as $item) {
                         $files[] = [
-                            'retivePath'    =>  $item['key'],
-                            'fileType'      =>  $item['mimeType'],
-                            'saveFileName'  =>  $item['key'],
-                            'extName'       =>  pathinfo($item['key'], PATHINFO_EXTENSION),
+                            'retivePath'        =>  $item['key'],
+                            'fileCustomPath'    =>  $prefix,
+                            'saveFileName'      =>  $item['key'],
+                            'extName'           =>  pathinfo($item['key'], PATHINFO_EXTENSION),
                         ];
                     }
                 }
@@ -130,12 +130,12 @@ class QiniuDriver implements SdkInterface
                 return $err;
             } else {
                 return [
-                    'fullPath'      =>  'http://' . $this->domain . '/' . $result['key'],
-                    'rootPath'      =>  'http://' . $this->domain . '/',
-                    'fileCustomPath' => $path,
-                    'retivePath'    =>  $result['key'],
-                    'fileretiveName' => $file->hashName($rule),
-                    'saveFileName'  =>  basename($savePath),
+                    'fullPath'          =>  $this->domain . '/' . $result['key'],
+                    'rootPath'          =>  $this->domain . '/',
+                    'fileCustomPath'    =>  $path,
+                    'retivePath'        =>  $result['key'],
+                    'fileRetiveName'    =>  $file->hashName($rule),
+                    'saveFileName'      =>  basename($savePath),
                 ];
             }
         } catch (\Exception $e) {

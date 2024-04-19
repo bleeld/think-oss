@@ -8,8 +8,6 @@ interface SdkInterface
     public function list ();
     public function uploadFile ();
     public function deleteFile ();
-
-
     // public function hasBucket (string $bucket = null);
     // public function getBucketInfo (string $bucket = null);
     // public function getBucketStat (string $bucket = null);

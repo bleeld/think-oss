@@ -12,6 +12,7 @@ use think\facade\Filesystem;
 class LocalDriver implements SdkInterface
 {
     private $rootPath;
+    private $domain;            //  本地需要配置网址
     private $bucket;
     private $target_path_dir;   //  用户需要自己定义的目录名称
     public $ossClient;
@@ -28,6 +29,8 @@ class LocalDriver implements SdkInterface
         $this->target_path_dir = $targetPathDir ? $targetPathDir : 'topic';
         //  定义本地文件操作的根目录
         $this->rootPath = $config['disks'][$this->bucket]['root'];
+        //  定义本地文件操作的根目录
+        $this->domain = config('oss.oss_url') . $config['disks'][$this->bucket]['url'] . '/';
     }
 
 
@@ -50,11 +53,10 @@ class LocalDriver implements SdkInterface
             $__files__ = [];
             foreach ($files as $file) {
                 $__files__[] = [
-                    'fileFullPath' => $file,
-                    'fileRootPath' => $this->rootPath,
-                    'fileCustomPath' => $path,
-                    'fileretiveName' => ltrim(str_replace('\\', '/', str_ireplace($this->rootPath, '', $file)), '/'),
-                    'fileName'      =>  basename($file),
+                    'retivePath'        =>  $file,
+                    'fileCustomPath'    =>  $path,
+                    'saveFileName'      =>  ltrim(str_replace('\\', '/', str_ireplace($this->rootPath, '', $file)), '/'),
+                    'extName'           =>  pathinfo($file, PATHINFO_EXTENSION),
                 ];
             }
             $files = $__files__;
@@ -78,12 +80,12 @@ class LocalDriver implements SdkInterface
             $filePath = $this->ossClient->putFileAs($path, $file, $savePath);
             if ($filePath){
                 return [
-                    'fullPath' =>    $filePath,
-                    'rootPath' =>    $this->rootPath,
-                    'fileCustomPath' => $path,
-                    'retivePath'    =>  $savePath,
-                    'fileretiveName' => $file->hashName($rule),
-                    'saveFileName'  =>  basename($savePath),
+                    'fullPath'          =>  $this->domain.$filePath,
+                    'rootPath'          =>  $this->rootPath,
+                    'fileCustomPath'    =>  $path,
+                    'retivePath'        =>  $savePath,
+                    'fileRetiveName'    =>  $file->hashName($rule),
+                    'saveFileName'      =>  basename($savePath),
                 ];
             }
             return false;

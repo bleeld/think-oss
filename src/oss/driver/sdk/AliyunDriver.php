@@ -65,10 +65,10 @@ class AliyunDriver implements SdkInterface
                 $ret = [];
                 foreach ($objectList as $objectInfo) {
                     $ret[] = [
-                        'fileretiveName'  =>  str_replace('\\', '/', $objectInfo->getKey()),
-                        'fileSize'  =>  $objectInfo->getSize(),
-                        'fileInfo'  =>  $objectInfo->getLastModified(),
-                        'fileType'  =>  pathinfo($objectInfo->getKey(), PATHINFO_EXTENSION),
+                        'retivePath'        =>  $objectInfo->getKey(),
+                        'fileCustomPath'    =>  $prefix,
+                        'saveFileName'      =>  str_replace('\\', '/', $objectInfo->getKey()),
+                        'extName'           =>  pathinfo($objectInfo->getKey(), PATHINFO_EXTENSION),
                     ];
                 }
                 return $ret;
@@ -103,12 +103,12 @@ class AliyunDriver implements SdkInterface
                 return false;
             }
             return [
-                'fullPath' =>    $result['info']['url'],
-                'rootPath' =>    $this->bucket. '.' . $this->endpoint,
-                'fileCustomPath' => $path,
-                'retivePath'    =>  $savePath,
-                'fileretiveName' => $file->hashName($rule),
-                'saveFileName'  =>  basename($savePath),
+                'fullPath'          =>  $result['info']['url'],
+                'rootPath'          =>  $this->bucket. '.' . $this->endpoint,
+                'fileCustomPath'    =>  $path,
+                'retivePath'        =>  $savePath,
+                'fileRetiveName'    =>  $file->hashName($rule),
+                'saveFileName'      =>  basename($savePath),
             ];
         } catch (\Exception $e) {
             return false;

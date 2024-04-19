@@ -24,12 +24,7 @@ class Demo
                 $file = '2.jpg';
 
                 //  定义驱动
-                $oss_type = 'local';
-
-                //$oss_type = 'aliyun';
-
-                //$oss_type = 'qiniu';
-
+                $oss_type = config('oss.oss_default');
 
                 //  实例化驱动
                 $ossClient = Oss::createOssService($oss_type);
@@ -41,14 +36,7 @@ class Demo
                 //$res = $ossClient->deleteFile($path, $file);
 
                 //  获取文件列表
-                //$res = $ossClient->list($path);
-
-
-
-
-
-
-
+                $res = $ossClient->list($path);
 
 
                 halt($res);
