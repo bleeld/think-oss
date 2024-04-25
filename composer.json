@@ -8,11 +8,7 @@
         "oss"
     ],
     "license": "MIT",
-<<<<<<< Updated upstream
-	"version": "1.0.2",
-=======
 	"version": "1.0.3",
->>>>>>> Stashed changes
     "authors": [
         {
             "name": "dreamlee",
